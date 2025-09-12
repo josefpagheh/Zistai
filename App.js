@@ -7,8 +7,7 @@ import { useFonts } from 'expo-font';
 // import {Link, Stack} from 'expo-router';
 import ListScreens from './screens/ListScreens';
 import EntryPage from './screens/EntryPage';
-import LoginPage from './screens/LoginPage';
-import LoginFormPage from './screens/LoginFormPage';
+import AuthPage from './screens/AuthPage';
 import MainPage from './screens/MainPage';
 import CoursePage from './screens/CoursePage';
 import mainHeader from './components/MainHeader';
@@ -46,51 +45,16 @@ export default function App() {
     <View style={{maxWidth:750, marginHorizontal: 'auto', flex: 1}}>
       <NavigationContainer>
         <Stack.Navigator  screenOptions={{
-          headerStyle: {
-            // backgroundColor: '#80BCBD',
-            background: 'transparent'
-            // borderBottomColor: '#80BCBD',
-            // borderBottomWidth: 4,
-            // shadowColor: 'transparent', // this covers iOS
-            // elevation: 0,
-            // maxWidth: 750,
-            // shadowColor: 'transparent',
-            // alignItems: 'center',
-            // justifyContent: 'center'
-          },
-          headerTitleStyle: {
-            fontSize: 24,
-          },
-          headerTransparent: true,
-          headerTintColor: '#fff',
-          headerTitle: '',
-          headerTitleAlign: 'center',
-          header: () =>  null,
-          headerShadowVisible: false
-          
+          headerShown: false
         }}>
-          <Stack.Screen name='QuestionPage' component={QuestionPage} options={{headerTitle: 'ZistAI',headerTintColor: 'transparent', headerStyle:{backgroundColor: '#77BFA3'}}} />
-
-          <Stack.Screen name='CoursePage' component={CoursePage} options={{headerTitle: 'ZistAI',headerTintColor: 'transparent', headerStyle:{backgroundColor: '#77BFA3'}}} />
-
-          <Stack.Screen name='MainPage' component={MainPage} options={{headerTitle: 'ZistAI',headerTintColor: 'transparent', headerStyle:{backgroundColor: '#77BFA3'}}} />
-
-
           <Stack.Screen name='EntryPage' component={EntryPage} />
-
-
-
-          <Stack.Screen name='ListScreens' component={ListScreens} options={{title: 'Welcome', headerStyle: {backgroundColor: '#80BCBD'}}} />
-
-
-
-          <Stack.Screen name='LoginFormPage' component={LoginFormPage} options={{headerTitle: 'ورود',headerTintColor: '#16292A', headerStyle:{backgroundColor: '#eef6f6'}}} />
-          <Stack.Screen name='LoginPage' component={LoginPage} />
-          {/* <Stack.Screen name='LoginPage' component={LoginPage} /> */}
+          <Stack.Screen name='AuthPage' component={AuthPage} />
+          <Stack.Screen name='MainPage' component={MainPage} />
+          <Stack.Screen name='CoursePage' component={CoursePage} />
+          <Stack.Screen name='QuestionPage' component={QuestionPage} />
+          <Stack.Screen name='ListScreens' component={ListScreens} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
   );
 }
-
-
