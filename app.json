@@ -3,16 +3,6 @@
     "name": "navTesting",
     "slug": "navTesting",
     "version": "1.0.0",
-    "plugins": [
-      [
-        "expo-font",
-        {
-          "fonts": [
-            "./assets/fonts/IRANSans.ttf"
-          ]
-        }
-      ]
-    ],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
