@@ -1,39 +1,3 @@
-export const books = [
-  {
-    "id": 1,
-    "name": "کتاب اول",
-    "chapters_count": 5
-  },
-  {
-    "id": 2,
-    "name": "کتاب دوم",
-    "chapters_count": 8
-  },
-  {
-    "id": 3,
-    "name": "کتاب سوم",
-    "chapters_count": 12
-  }
-];
-
-export const chapters = [
-  {
-    "id": 1,
-    "name": "فصل اول",
-    "question_count": 10
-  },
-  {
-    "id": 2,
-    "name": "فصل دوم",
-    "question_count": 15
-  },
-  {
-    "id": 3,
-    "name": "فصل سوم",
-    "question_count": 20
-  }
-];
-
 export const questions = [
     {
         "question": "پروانه های مونارک هر چند سال مهاجرت میکنند؟",
@@ -2070,4 +2034,3 @@ export const questions = [
         ]
     }
 ];
-export default questions;
