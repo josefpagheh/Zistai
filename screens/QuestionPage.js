@@ -140,35 +140,6 @@ const styles = StyleSheet.create({
 });
 
 export default class QuestionPage extends React.Component {
-  // getQuestions = (book_id, chapter_id) => {
-  //     return fetch(`http://127.0.0.1:8000/api/getQuestionsForReview1`)
-  //     .then(response => response.json())
-  //     .then(json => {
-  //       this.setState({QUESTIONS: json, loadingQuestions: false, totalQuestionCount: json.length, active_time_start: new Date().getTime()});
-  //     })
-  //     .catch(error => {
-  //       console.error(error);
-  //     });
-  // };
-  // fetchAnswer = (data) => {
-  //   fetch('http://127.0.0.1:8000/api/checkAnswer', {
-  //     method: 'POST',
-  //     headers: {
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(data),
-  //   })
-  //   .then(response => response.json())
-  //   .then(json => {
-  //     console.log(json);
-  //     return json;
-  //   })
-  //   .catch(error => {
-  //     console.error(error);
-  //   });
-  // }
-
   state = {
     QUESTIONS: questions,
     totalQuestionCount: questions.length,

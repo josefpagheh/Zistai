@@ -72,22 +72,6 @@ const styles = StyleSheet.create({
 });
 
 export default class CoursePage extends React.Component {
-  // getChapters = (book_id) => {
-  //   return fetch(`http://127.0.0.1:8000/api/chaptersList/${book_id}`)
-  //   .then(response => response.json())
-  //   .then(json => {
-  //     this.setState({CHAPTERS: json.data, loading: false});
-  //   })
-  //   .catch(error => {
-  //     console.error(error);
-  //   });
-  // };
-  // state = {
-  //   loading: true,
-  //   CHAPTERS : {},
-  // }
-  // tmp = this.getChapters(10);
-
   render() {
     return (
       <View style={styles.container}>
