@@ -7,6 +7,7 @@ import { faCirclePlay, faSun, faAngleRight, faAngleLeft } from '@fortawesome/fre
 import profileImage from '../assets/logo.png';
 import { TextInput, TouchableOpacity } from 'react-native-web';
 import MainHeader from '../components/MainHeader'
+import { chapters } from '../data/sampleData';
 
 
 const screen = Dimensions.get('window');
@@ -28,7 +29,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     backgroundColor: '#000000c0',
-  
+
   },
   playGround: {
     backgroundColor: '#fff',
@@ -50,14 +51,14 @@ const styles = StyleSheet.create({
   logoConatainer: {
     // justifyContent: 'center',
     alignItems: 'center',
-    
+
   },
   logoImage: {
     width: 60,
     height: 60,
     // backgroundColor: '#fff'
   },
-  logoText: { 
+  logoText: {
       marginTop: 1,
       color: '#fff',
       fontSize: 26,
@@ -79,7 +80,7 @@ const styles = StyleSheet.create({
   },
   playGroundTitle: {
     color: 'rgba(22, 41, 42, 0.7)',
-    fontSize: 26, 
+    fontSize: 26,
     fontWeight: '500',
     paddingBottom: 20,
     // backgroundColor: '#ccc',
@@ -210,7 +211,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 15,
     justifyContent: 'space-between',
-    alignItems: 'center', 
+    alignItems: 'center',
     marginBottom: 15,
     // borderColor: '#BFD8BD',
     // borderWidth: 1,
@@ -252,30 +253,11 @@ const styles = StyleSheet.create({
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-const Stack = createNativeStackNavigator();  
+const Stack = createNativeStackNavigator();
 
 
 export default class CoursePage extends React.Component {
-  getChapters = (book_id) => {
-    return fetch(`http://127.0.0.1:8000/api/chaptersList/${book_id}`)
-    .then(response => response.json())
-    .then(json => {
-      // console.log(json['data']);
-      this.setState({CHAPTERS: json.data, loading: false});
-    })
-    .catch(error => {
-      console.error(error);
-    });
-  };
-  state = {
-    loading: true,
-    CHAPTERS : {},
-  }
-  tmp = this.getChapters(10);
   render() {
-    if(this.state.loading){
-      return null;
-    }
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../assets/bg4.png')} resizeMode="cover" style={[styles.imageBg]} >
@@ -306,19 +288,19 @@ export default class CoursePage extends React.Component {
                         <View style={styles.clickToGoDetails}>
                             <Text style={styles.clickToGoTitle}>بزن بریم!</Text>
                             <Text style={styles.clickToGoCategory}>{'آنمی همولیتیک'}</Text>
-                        </View> 
-        
+                        </View>
+
                     </View>
                     {/* </ImageBackground> */}
                 </View>
                 <View style={styles.playGround}>
-                  
+
                 {/* <View style={{alignItems:'center', padding: 15,width: '100%'}} > */}
                     <Text style={styles.playGroundTitle}>{'فصل 1 دوازدهم'}</Text>
                     <View style={styles.subCategoryContainer}>
                     {/* //88E2CE  A188E2 E2889C bdae80*/}
-                        {this.state.CHAPTERS.map(chapter => (
-                        <View style={[styles.subCategory]}> 
+                        {chapters.map(chapter => (
+                        <View style={[styles.subCategory]} key={chapter.id}>
                           <FontAwesomeIcon icon={faAngleLeft} size={32} color='rgba(22, 41, 42, 0.7)' />
                           <View style={styles.subCategoryDetails}>
                               <View style={styles.subCategoryDetailsText}>
@@ -348,7 +330,7 @@ export default class CoursePage extends React.Component {
                             <Text style={styles.categorySubCount}>21 درس</Text>
                         </View>         */}
                     </View>
-                    
+
                 {/* </View>  */}
                 </View>
             </ScrollView>

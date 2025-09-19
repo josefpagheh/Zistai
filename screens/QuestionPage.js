@@ -10,6 +10,7 @@ import * as Font from 'expo-font';
 import profileImage from '../assets/logo.png';
 import { Animated, TextInput } from 'react-native-web';
 import MainHeader from '../components/MainHeader'
+import { questions } from '../data/sampleData';
 
 
 const screen = Dimensions.get('window');
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     backgroundColor: '#000000c0',
-  
+
   },
   headerContainer: {
     // justifyContent: 'flex-start',
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
   },
   trueAnswerContainer: {
     backgroundColor: '#77BFA3',
-    borderWidth: 0, 
+    borderWidth: 0,
     shadowColor: 'rgba(22, 41, 42, 0.8)',
     shadowOffset: {
       width: 0,
@@ -183,7 +184,7 @@ const styles = StyleSheet.create({
   },
   playGroundTitle: {
     color: 'rgba(22, 41, 42, 0.7)',
-    fontSize: 26, 
+    fontSize: 26,
     fontWeight: '500',
     paddingBottom: 20,
     // backgroundColor: '#ccc',
@@ -257,30 +258,27 @@ const styles = StyleSheet.create({
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // import TempData from ''
-const Stack = createNativeStackNavigator();  
+const Stack = createNativeStackNavigator();
 // const [fontsLoaded] = useFonts({
 //   'Inter-Black': require('../assets/fonts/IRANSans.ttf'),
 // });
 
 export default class QuestionPage extends React.Component {
   // fadeAnim = useRef(new Animated.Value(0)).current;
- 
+
   state = {
-    QUESTIONS : {},
-    loadingQuestions: true,
-    totalQuestionCount: 0,
+    QUESTIONS : questions,
+    totalQuestionCount: questions.length,
     activeQuestionIndex: 0,
     answered: false,
     answerCorrect: false,
     isAnsweredOptionId: null,
     fontLoaded: false,
-    active_time_start : 0,
-    non_active_time_start : 0,
   };
   checkAnswer = (answer) => {
     this.setState(state => {
       // alert(Element.key)
-      const nextState = {answered: true, isAnsweredOptionId: answer.id, non_active_time_start: new Date().getTime()};
+      const nextState = {answered: true, isAnsweredOptionId: answer.id};
       if(answer.correct) {
         nextState.answerCorrect = true;
       }else{
@@ -289,95 +287,23 @@ export default class QuestionPage extends React.Component {
       return nextState;
     });
   }
-  fetchAnswer = (data) => {
-    // console.log(non_active_time);
-    fetch('http://127.0.0.1:8000/api/checkAnswer', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    })
-    .then(response => response.json())
-    .then(json => {
-      console.log(json);
-      return json;
-      // this.setState({QUESTIONS: json, loadingQuestions: false, totalQuestionCount: json.length});
-    })
-    .catch(error => {
-      console.error(error);
-    });
-  }
-  calcTimesAndFetch = (self_evaluation) => {
-    const end_time = new Date().getTime();
-    const active_time = this.state.non_active_time_start - this.state.active_time_start;
-    const non_active_time = end_time - this.state.non_active_time_start;
-    this.fetchAnswer({'question_id': this.state.QUESTIONS[this.state.activeQuestionIndex].id, 'is_correct': this.state.answerCorrect, 'self_evaluation': self_evaluation, 'active_time': active_time, 'non_active_time': non_active_time, 'user_id': '1'});
-
-  } 
-  nextQuestion = (self_evaluation) => {
-   this.calcTimesAndFetch(self_evaluation);
-   
+  nextQuestion = () => {
     this.setState(state => {
       let nextActiveQuestionIndex = state.activeQuestionIndex + 1;
       if (nextActiveQuestionIndex > state.totalQuestionCount-1) {
         nextActiveQuestionIndex = 0;
       }
-      // fadeIn();
-      // let nextState = {}
-      
- 
-      // console.log(active_time);
-      // console.log(non_active_time);
-
       return {
         activeQuestionIndex: nextActiveQuestionIndex,
         answered: false,
         answerCorrect: false,
         isAnsweredOptionId: null,
-        active_time_start: new Date().getTime(),
       };
-      // return nextState;
     })
   }
-  getQuestions = (book_id, chapter_id) => {
-      return fetch(`http://127.0.0.1:8000/api/getQuestionsForReview1`)
-      .then(response => response.json())
-      .then(json => {
-        // console.log(response[0]);
-        this.setState({QUESTIONS: json, loadingQuestions: false, totalQuestionCount: json.length, active_time_start: new Date().getTime()});
-      })
-      .catch(error => {
-        console.error(error);
-      });
-  };
-  // async componentWillMount() {
-  //   await Font.loadAsync({
-  //     'IRANSans': require('../assets/fonts/IRANSans.ttf'),
-  //     // 'open-sans-bold': require('./assets/fonts/OpenSans-Bold.ttf')
-  //   });
-  //   this.setState({ fontLoaded: true });
-  //   // console.log('done');
-  // }
-
-  TempData = this.getQuestions(50, 1379);
 
   render() {
-    if(this.state.loadingQuestions){
-      return null;
-    }
-    // if (!this.state.fontLoaded) {
-    //   return null;
-    // }
     const question = this.state.QUESTIONS[this.state.activeQuestionIndex];
-    // console.log(question);
-    // [this.state.activeQuestionIndex];
-    // this.TempData.then(res => {console.log(res)})
-
-    // const containerStyle = [styles.answerContainer]
-    // if(answered )
-    // return null;
     return (
       <View style={styles.container}>
         <ImageBackground source={require('../assets/bg4.png')} resizeMode="cover" style={[styles.imageBg]} >
@@ -400,29 +326,29 @@ export default class QuestionPage extends React.Component {
                    ))} */}
                 </View>
                 <View style={[styles.playGround, styles.playGroundMargin]}>
-                  
+
                 {/* <View style={{alignItems:'center', padding: 15,width: '100%'}} > */}
                     <View style={styles.QuestionProgressBar}></View>
                     <View style={styles.quizContainer}>
                       <View style={styles.questionContainer}>
                           <Text style={styles.questionText}>{question.text}</Text>
                       </View>
-                      <View style={styles.answersConatiner}> 
+                      <View style={styles.answersConatiner}>
                           {question.answers.map(answer => (
                             // <View style={[styles.answerContainer]}>
-                            this.state.answered ? ( 
+                            this.state.answered ? (
                               answer.correct ? (
-                                <View key={answer.id} style={[styles.answerContainer, (styles.trueAnswerContainer)]} onPress={() => {this.checkAnswer(answer)}}>  
+                                <View key={answer.id} style={[styles.answerContainer, (styles.trueAnswerContainer)]} onPress={() => {this.checkAnswer(answer)}}>
                                   <FontAwesomeIcon icon={(faCheck )} size={32} color={'rgba(255,255,255, .9)'} />
                                   <Text style={[styles.answerText, (styles.trueAnswerText)]}>{answer.text}</Text>
                                 </View>
                               ) : (
-                                <View key={answer.id} style={[styles.answerContainer, (answer.id == this.state.isAnsweredOptionId && styles.falseAnswerContainer)]} onPress={() => {}}>  
+                                <View key={answer.id} style={[styles.answerContainer, (answer.id == this.state.isAnsweredOptionId && styles.falseAnswerContainer)]} onPress={() => {}}>
                                 {/* , (answer.id == this.state.isAnsweredOptionId && styles.falseAnswerContainer) */}
                                   {answer.id == this.state.isAnsweredOptionId && <FontAwesomeIcon icon={(faClose )} size={32} color={'#CE6F4C'} />}
                                   <Text style={[styles.answerText, (answer.id == this.state.isAnsweredOptionId && styles.falseAnswerText)]}>{answer.text}</Text>
                                 </View>
-                              ) 
+                              )
 
                             ) : (
                               <Pressable key={answer.id} style={[styles.answerContainer]} onPress={() => this.checkAnswer(answer)}>
@@ -445,17 +371,17 @@ export default class QuestionPage extends React.Component {
                           </View> */}
                       </View>
                       {this.state.answered && (
-                       <View style={[styles.nextButtonContainer]}>  
-                          <Pressable style={[styles.nextButton, styles.leftNextButton]} onPress={() => this.nextQuestion(1)}> 
+                       <View style={[styles.nextButtonContainer]}>
+                          <Pressable style={[styles.nextButton, styles.leftNextButton]} onPress={() => this.nextQuestion(1)}>
                               <FontAwesomeIcon icon={faFaceLaughWink} size={50} color='#6583DA'/>
                           </Pressable>
                           <Pressable style={[styles.nextButton, styles.middleNextButton]} onPress={() => this.nextQuestion(2)}>
-                              <FontAwesomeIcon icon={faFaceSmile} size={'50%'} color='#77BFA3'/>    
+                              <FontAwesomeIcon icon={faFaceSmile} size={'50%'} color='#77BFA3'/>
                           </Pressable>
                           <Pressable style={[styles.nextButton, styles.rightNextButton]} onPress={() => this.nextQuestion(3)}>
-                              <FontAwesomeIcon icon={faFaceDizzy} size={'50%'} color='#CD704D'/> 
+                              <FontAwesomeIcon icon={faFaceDizzy} size={'50%'} color='#CD704D'/>
                           </Pressable>
-                      </View> 
+                      </View>
                       )}
 
                     </View>
