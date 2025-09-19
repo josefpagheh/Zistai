@@ -114,26 +114,7 @@ const styles = StyleSheet.create({
 });
 
 export default class MainPage extends React.Component {
-  // getBooks = () => {
-  //   return fetch('http://127.0.0.1:8000/api/booksList')
-  //   .then(response => response.json())
-  //   .then(json => {
-  //     this.setState({BOOKS: json.data, loading: false});
-  //   })
-  //   .catch(error => {
-  //     console.error(error);
-  //   });
-  // };
-  // state = {
-  //   loading: true,
-  //   BOOKS : {},
-  // }
-  // tmp = this.getBooks();
-
   render() {
-    // if(this.state.loading){
-    //   return null;
-    // }
     return (
       <View style={styles.container}>
         <StatusBar style="auto" />

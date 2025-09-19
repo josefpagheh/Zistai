@@ -63,7 +63,7 @@ export default class LoginFormPage extends React.Component {
         <View style={styles.formContainer}>
           <TextInput style={styles.input} placeholder='نام کاربری' />
           <TextInput style={styles.input} placeholder='رمز عبور' secureTextEntry={true} />
-          <TouchableOpacity style={styles.button} onPress={() => this.props.setIsAuthenticated(true)}>
+          <TouchableOpacity style={styles.button}>
             <Text style={styles.buttonText}>ورود</Text>
           </TouchableOpacity>
         </View>

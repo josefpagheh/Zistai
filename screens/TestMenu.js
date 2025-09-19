@@ -19,12 +19,12 @@ const TestMenu = ({ navigation }) => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.buttonContainer}>
-        <Button title="Entry Page" onPress={() => navigation.navigate('Entry')} color="#6AC46A" />
-        <Button title="Login Page" onPress={() => navigation.navigate('Login')} color="#6AC46A" />
-        <Button title="Login Form Page" onPress={() => navigation.navigate('LoginForm')} color="#6AC46A" />
-        <Button title="Main Page" onPress={() => navigation.navigate('Main')} color="#6AC46A" />
-        <Button title="Course Page" onPress={() => navigation.navigate('Courses')} color="#6AC46A" />
-        <Button title="Question Page" onPress={() => navigation.navigate('Questions')} color="#6AC46A" />
+        <Button title="Entry Page" onPress={() => navigation.navigate('EntryPage')} color="#6AC46A" />
+        <Button title="Login Page" onPress={() => navigation.navigate('LoginPage')} color="#6AC46A" />
+        <Button title="Login Form Page" onPress={() => navigation.navigate('LoginFormPage')} color="#6AC46A" />
+        <Button title="Main Page" onPress={() => navigation.navigate('MainPage')} color="#6AC46A" />
+        <Button title="Course Page" onPress={() => navigation.navigate('CoursePage')} color="#6AC46A" />
+        <Button title="Question Page" onPress={() => navigation.navigate('QuestionPage')} color="#6AC46A" />
       </View>
     </SafeAreaView>
   );
